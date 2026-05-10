@@ -15,7 +15,7 @@ void initStage1(Stage1 *stage) {
     stage->roadPosition = 0.0f;
 } 
 
-void updatestage1(Stage1 *stage, float deltaTime) {
+void updateStage1(Stage1 *stage, float deltaTime) {
 
     stage->roadPosition +=  stage->scrollSpeed * deltaTime;
 
