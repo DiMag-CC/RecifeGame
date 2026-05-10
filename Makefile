@@ -4,6 +4,8 @@ CFLAGS = -Wall -Wextra $(shell pkg-config --cflags raylib)
 
 LDFLAGS = $(shell pkg-config --libs raylib) -lm
 
+BUILD_DIR = build
+
 SRC = $(wildcard src/*.c) \
       $(wildcard src/entities/*.c) \
       $(wildcard src/steps/*.c) \
@@ -11,28 +13,24 @@ SRC = $(wildcard src/*.c) \
       $(wildcard src/utils/*.c) \
       $(wildcard src/gfx/*.c)
 
-OBJ = $(SRC:.c=.o)
-
-BUILD_DIR = build
+OBJ = $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC))
 
 TARGET = $(BUILD_DIR)/deixaeu
 
 .PHONY: all clean run
 
-all: $(BUILD_DIR) $(TARGET)
-
-$(BUILD_DIR):
-	mkdir -p $(BUILD_DIR)
+all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $(OBJ) -o $(TARGET) $(LDFLAGS)
+	@mkdir -p $(dir $@)
+	$(CC) $(OBJ) -o $@ $(LDFLAGS)
 
-%.o: %.c
+$(BUILD_DIR)/%.o: %.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run: all
 	./$(TARGET)
 
 clean:
-	rm -f $(OBJ)
 	rm -rf $(BUILD_DIR)
