@@ -23,6 +23,14 @@ Player createPlayer(Vector2 initialPosition, float initialSpeed,  int initialLiv
 void updatePlayer(Player *player, float deltaTime) {
     player->position.x += player->speed * deltaTime;
 
+    if (IsKeyDown(KEY_A)) { // Esquerda
+        player->position.x -= 300 * deltaTime;
+    }
+
+    if (IsKeyDown(KEY_D)) { // Direita
+        player->position.x += 300 * deltaTime;
+    }
+
     if (IsKeyPressed(KEY_SPACE)) { // Pular
         player->velocity.y = -PLAYER_JUMP_SPEED;
     }
