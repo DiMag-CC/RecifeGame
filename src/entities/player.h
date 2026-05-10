@@ -19,6 +19,7 @@ typedef struct player {
     float score;
     int height;
     int lives;
+    bool grounded;
 } Player;
 
 Player createPlayer(Vector2 initialPosition, float initialSpeed, int initialLives);

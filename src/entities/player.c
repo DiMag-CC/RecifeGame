@@ -15,6 +15,7 @@ Player createPlayer(Vector2 initialPosition, float initialSpeed,  int initialLiv
     player.speed = initialSpeed;
     player.lives = initialLives;
     player.score = 0;
+    player.grounded = true;
 
     return player;
 
@@ -31,8 +32,9 @@ void updatePlayer(Player *player, float deltaTime) {
         player->position.x += 300 * deltaTime;
     }
 
-    if (IsKeyPressed(KEY_SPACE)) { // Pular
+    if (IsKeyPressed(KEY_SPACE) && player->grounded) { // Pular
         player->velocity.y = -PLAYER_JUMP_SPEED;
+        player->grounded = false;
     }
 
     player->velocity.y += GRAVITY * deltaTime;
@@ -42,6 +44,7 @@ void updatePlayer(Player *player, float deltaTime) {
     if (player->position.y >= GROUND_LEVEL) { // Está no chão?
         player->position.y = GROUND_LEVEL;
         player->velocity.y = 0;
+        player->grounded = true;
     }
 
     if (IsKeyPressed(KEY_DOWN)) { // Abaixar
