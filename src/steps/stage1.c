@@ -29,7 +29,7 @@ void drawStage1(Stage1 *stage) {
     DrawTextureEx(stage.background, (Vector2){ 0, 0 }, 0.0f, 1.0f, WHITE);
 
     for (int i = 0; i < (sizeof(stage->buildings) / 4); i++) {
-        Vector2 position = { stage.roadPosition + 1 * 200, GetScreenHeight() - stage.buildings[i].height };
+        Vector2 position = { stage.roadPosition + i * 200, GetScreenHeight() - stage.buildings[i].height };
         DrawTextureEx(stage.buildings[i], position, 0.0f, 1.0f, WHITE);
     }
 }
