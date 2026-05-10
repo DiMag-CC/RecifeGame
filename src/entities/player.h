@@ -12,6 +12,7 @@
 #define PLAYER_STANDING_HEIGHT PLAYER_HEIGHT
 
 typedef struct player {
+    Texture2D texture;
     Vector2 position;
     Vector2 velocity;
     float speed;
@@ -23,5 +24,6 @@ typedef struct player {
 Player createPlayer(Vector2 initialPosition, float initialSpeed, int initialLives);
 void updatePlayer(Player *player, float deltaTime);
 void drawPlayer(Player player);
+void unloadPlayer(Player *player);
 
 #endif

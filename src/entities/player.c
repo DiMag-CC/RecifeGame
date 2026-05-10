@@ -1,6 +1,14 @@
 #include <raylib.h>
 #include "player.h"
 
+// #define PLAYER_WIDTH 40
+// #define PLAYER_HEIGHT 60
+// #define PLAYER_JUMP_SPEED 420.0f
+// #define GRAVITY 980.0f
+// #define GROUND_LEVEL 380.0f
+// #define PLAYER_CROUCH_HEIGHT 35
+// #define PLAYER_STANDING_HEIGHT PLAYER_HEIGHT
+
 Player createPlayer(Vector2 initialPosition, float initialSpeed,  int initialLives) {
     Player player;
     player.position = initialPosition;
