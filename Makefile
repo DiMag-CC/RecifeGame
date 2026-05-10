@@ -1,16 +1,19 @@
 CC := gcc
-CFLAGS := -Wall -Wextra -I./src
-RAYLIB_PATH ?=
-ifneq ($(RAYLIB_PATH),)
-	CFLAGS += -I$(RAYLIB_PATH)/include
-	LDFLAGS := -L$(RAYLIB_PATH)/lib -lraylib -lopengl32 -lgdi32 -lwinmm
-else
-	LDFLAGS := -lraylib -lopengl32 -lgdi32 -lwinmm
-endif
 
-SRC := $(wildcard src/**/*.c) $(wildcard src/*.c)
+CFLAGS := -Wall -Wextra -I./src $(shell pkg-config --cflags raylib)
+
+LDFLAGS := $(shell pkg-config --libs raylib) -lm
+
+SRC := $(wildcard src/*.c) \
+       $(wildcard src/entities/*.c) \
+       $(wildcard src/steps/*.c) \
+       $(wildcard src/structure/*.c) \
+       $(wildcard src/utils/*.c) \
+       $(wildcard src/gfx/*.c)
+
 OBJ := $(SRC:.c=.o)
-TARGET := jogo.exe
+
+TARGET := deixaeu
 
 .PHONY: all clean run
 
@@ -26,4 +29,4 @@ run: all
 	./$(TARGET)
 
 clean:
-	del /Q /F $(OBJ) $(TARGET) 2>nul || exit 0
+	rm -f $(OBJ) $(TARGET)
