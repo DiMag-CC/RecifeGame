@@ -1,4 +1,4 @@
-#include "../raylib.h"
+#include <raylib.h>
 #include "crab.h"
 
 Crab createCrab(Vector2 position, int frameSpeed) {
