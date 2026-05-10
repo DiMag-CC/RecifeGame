@@ -44,10 +44,23 @@ void updateStage1(Stage1 *stage, float deltaTime) {
 void drawStage1(Stage1 *stage) {
 
     DrawTextureEx(stage.background, (Vector2){ 0, 0 }, 0.0f, 1.0f, WHITE);
+    ObstacleNode *current = stage->obstacleQueue.front;
 
     for (int i = 0; i < (sizeof(stage->buildings) / 4); i++) {
         Vector2 position = { stage.roadPosition + i * 200, GetScreenHeight() - stage.buildings[i].height };
         DrawTextureEx(stage.buildings[i], position, 0.0f, 1.0f, WHITE);
+    }
+
+    while (current != NULL) {
+        DrawRectangle(
+            current->obstacle.position.x,
+            current->obstacle.position.y,
+            40,
+            40,
+            RED
+        );
+
+        current = current->next;
     }
 }
 
