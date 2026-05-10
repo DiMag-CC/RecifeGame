@@ -1,23 +1,33 @@
 #include <stdio.h>
 #include "structure/stepList.h"
 
+#include "raylib.h"
+#include "stage1.h"
+
 int main() {
+    // Inicialização da janela do jogo e outros recursos
 
-    Phase *head = NULL;
-    Phase *phase1 = createPhase(1, "Pedalando no Caos");
-    insertPhase(&head, phase1);
+    Stage1 stage;
+    initStage1(&stage);
 
-    Phase *currentPhase = head;
+    while (!WindowShouldClose()) {
 
-    printf("Fase Atual: %s\n", currentPhase->phaseName);
-    
-    nextPhase(&currentPhase);
-    printf("Próxima Fase: %s\n", currentPhase->phaseName);
-    
-    previousPhase(&currentPhase);
-    printf("Fase Anterior: %s\n", currentPhase->phaseName);
-    
 
+        updateStage1(&stage, GetFrameTime());
+
+
+
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        drawStage1(stage);
+
+        EndDrawing();
+    }
+
+    // Descarregando recursos
+    unloadStage1(&stage);
+
+    CloseWindow();
     return 0;
-
 }
