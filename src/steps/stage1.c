@@ -23,6 +23,7 @@ void updateStage1(Stage1 *stage, float deltaTime) {
 
     stage->obstacleSpawnTimer += deltaTime;
     stage->roadPosition +=  stage->scrollSpeed * deltaTime;
+    ObstacleNode *current = stage->obstacleQueue.front;
 
     if (stage->obstacleSpawnTimer >= 2.0f) {
         Obstacle obstacle = createObstacle(
@@ -38,6 +39,13 @@ void updateStage1(Stage1 *stage, float deltaTime) {
 
     if (stage->roadPosition >= GetScreenWidth()) {
         stage->roadPosition = 0.0f;
+    }
+
+
+    while (current != NULL) {
+        current->obstacle.position.x -= 300 * deltaTime;
+
+        current = current->next;
     }
 }
 
