@@ -6,6 +6,8 @@ typedef struct {
     int y;
     int width;
     int height;
+    int type;
+    Color color;
 } Obstacle;
 
 Obstacle createObstacle(int x, int y, int width, int height);
