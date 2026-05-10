@@ -1,5 +1,6 @@
 #include "bike.h"
 #include <raylib.h>
+#include <math.h>
 
 Bike createBike(Vector2 initialPosition, const char* textureFileName, float initialWheelSpeed) {
     Bike bike;

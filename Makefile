@@ -1,6 +1,12 @@
 CC := gcc
 CFLAGS := -Wall -Wextra -I./src
-LDFLAGS := -lraylib -lopengl32 -lgdi32 -lwinmm
+RAYLIB_PATH ?=
+ifneq ($(RAYLIB_PATH),)
+	CFLAGS += -I$(RAYLIB_PATH)/include
+	LDFLAGS := -L$(RAYLIB_PATH)/lib -lraylib -lopengl32 -lgdi32 -lwinmm
+else
+	LDFLAGS := -lraylib -lopengl32 -lgdi32 -lwinmm
+endif
 
 SRC := $(wildcard src/**/*.c) $(wildcard src/*.c)
 OBJ := $(SRC:.c=.o)

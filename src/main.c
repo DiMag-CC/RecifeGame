@@ -1,6 +1,6 @@
 #include <raylib.h>
-#include "stage1.h"
-#include "player.h"
+#include "steps/stage1.h"
+#include "entities/player.h"
 
 int main(void) {
     const int screenWidth = 800;
@@ -19,14 +19,14 @@ int main(void) {
     while (!WindowShouldClose()) {
         float deltaTime = GetFrameTime();
 
-        updateStage1(&stage, deltaTime);
+        updateStage1(&stage, &player, deltaTime);
         updatePlayer(&player, deltaTime);
 
         BeginDrawing();
 
         ClearBackground(RAYWHITE);
 
-        drawStage1(stage);
+        drawStage1(&stage);
         drawPlayer(player);
 
         DrawFPS(10, 10);

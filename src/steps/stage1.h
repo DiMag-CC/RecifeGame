@@ -3,6 +3,7 @@
 
 #include <raylib.h>
 #include "../structure/obstacleQueue.h"
+#include "../entities/player.h"
 
 typedef struct Stage1 {
     float scrollSpeed;  
@@ -14,8 +15,8 @@ typedef struct Stage1 {
 } Stage1;
 
 void initStage1(Stage1* stage);  
-void updateStage1(Stage1* stage, float deltaTime);  
-void drawStage1(Stage1 stage);  
+void updateStage1(Stage1* stage, Player *player, float deltaTime);  
+void drawStage1(Stage1 *stage);  
 void unloadStage1(Stage1* stage);  
 
 #endif

@@ -1,4 +1,6 @@
 #include "stage1.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void initStage1(Stage1 *stage) {
 
@@ -10,16 +12,16 @@ void initStage1(Stage1 *stage) {
 
     stage->background = LoadTexture("assets/img/background1.png");
 
-    for (int i = 0; i < (sizeof(stage->buildings) / 4); i++) {
+    for (int i = 0; i < 5; i++) {
         char fileName[128];
-        sprintf(fileName, "assets/img/building%d.png", i+1); 
+        sprintf(fileName, "assets/img/building%d.png", i + 1);
         stage->buildings[i] = LoadTexture(fileName);
     }
 
     stage->roadPosition = 0.0f;
 } 
 
-void updateStage1(Stage1 *stage, float deltaTime) {
+void updateStage1(Stage1 *stage, Player *player, float deltaTime) {
 
     stage->obstacleSpawnTimer += deltaTime;
     stage->roadPosition +=  stage->scrollSpeed * deltaTime;
@@ -42,6 +44,9 @@ void updateStage1(Stage1 *stage, float deltaTime) {
 
     while (current != NULL) {
         current->obstacle.position.x -= 300 * deltaTime;
+        current->obstacle.data.crab.position.x = current->obstacle.position.x;
+        current->obstacle.data.crab.hitbox.x = current->obstacle.position.x;
+        current->obstacle.data.crab.hitbox.y = current->obstacle.position.y;
 
         current = current->next;
     }
@@ -51,18 +56,27 @@ void updateStage1(Stage1 *stage, float deltaTime) {
     dequeueObstacle(&stage->obstacleQueue);
     }
 
-    CheckCollisionRecs();
+    current = stage->obstacleQueue.front;
+    while (current != NULL) {
+        if (CheckCollisionRecs(player->hitbox, current->obstacle.data.crab.hitbox)) {
+            player->lives -= 1;
+            current->obstacle.position.x = -100.0f;
+            current->obstacle.data.crab.position.x = -100.0f;
+            current->obstacle.data.crab.hitbox.x = -100.0f;
+        }
+        current = current->next;
+    }
 
 }
 
 void drawStage1(Stage1 *stage) {
 
-    DrawTextureEx(stage.background, (Vector2){ 0, 0 }, 0.0f, 1.0f, WHITE);
+    DrawTextureEx(stage->background, (Vector2){ 0, 0 }, 0.0f, 1.0f, WHITE);
     ObstacleNode *current = stage->obstacleQueue.front;
 
-    for (int i = 0; i < (sizeof(stage->buildings) / 4); i++) {
-        Vector2 position = { stage.roadPosition + i * 200, GetScreenHeight() - stage.buildings[i].height };
-        DrawTextureEx(stage.buildings[i], position, 0.0f, 1.0f, WHITE);
+    for (int i = 0; i < 5; i++) {
+        Vector2 position = { stage->roadPosition + i * 200, GetScreenHeight() - stage->buildings[i].height };
+        DrawTextureEx(stage->buildings[i], position, 0.0f, 1.0f, WHITE);
     }
 
     while (current != NULL) {

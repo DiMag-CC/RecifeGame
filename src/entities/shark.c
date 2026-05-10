@@ -1,4 +1,5 @@
 #include "shark.h"
+#include <raymath.h>
 
 Shark createShark(Vector2 position, Vector2 velocity) {
     Shark shark;
