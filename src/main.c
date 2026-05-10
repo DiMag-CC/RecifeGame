@@ -29,6 +29,7 @@ int main(void) {
         drawStage1(stage);
         drawPlayer(player);
 
+        DrawFPS(10, 10);
         EndDrawing();
     }
 
