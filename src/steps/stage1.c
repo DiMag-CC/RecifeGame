@@ -2,6 +2,10 @@
 
 void initStage1(Stage1 *stage) {
 
+    initObstacleQueue(&stage->obstacleQueue);
+
+    stage->obstacleSpawnTimer = 0.0f;
+
     stage->scrollSpeed = 100.0f;
 
     stage->background = LoadTexture("assets/img/background1.png");
@@ -17,7 +21,20 @@ void initStage1(Stage1 *stage) {
 
 void updateStage1(Stage1 *stage, float deltaTime) {
 
+    stage->obstacleSpawnTimer += deltaTime;
     stage->roadPosition +=  stage->scrollSpeed * deltaTime;
+
+    if (stage->obstacleSpawnTimer >= 2.0f) {
+        Obstacle obstacle = createObstacle(
+            (Vector2){ GetScreenWidth(), GROUND_LEVEL + 20 },
+            OBSTACLE_CRAB
+        );
+
+        enqueueObstacle(&stage->obstacleQueue, obstacle);
+
+        stage->obstacleSpawnTimer = 0.0f;
+    }
+
 
     if (stage->roadPosition >= GetScreenWidth()) {
         stage->roadPosition = 0.0f;
