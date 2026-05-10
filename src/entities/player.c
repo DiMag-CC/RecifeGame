@@ -62,6 +62,6 @@ void updatePlayer(Player *player, float deltaTime) {
 
 void drawPlayer(Player player) {
 
-    DrawRectangle(player.position.x, player.position.y, PLAYER_WIDTH, PLAYER_HEIGHT, WHITE);
+    DrawRectangle(player.position.x, player.position.y, PLAYER_WIDTH, PLAYER_HEIGHT, BLACK);
     
 }
