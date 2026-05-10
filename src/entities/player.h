@@ -15,6 +15,7 @@ typedef struct player {
     Texture2D texture;
     Vector2 position;
     Vector2 velocity;
+    Rectangle hitbox;
     float speed;
     float score;
     int height;

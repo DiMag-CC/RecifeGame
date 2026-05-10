@@ -22,6 +22,10 @@ Player createPlayer(Vector2 initialPosition, float initialSpeed,  int initialLiv
 }
 
 void updatePlayer(Player *player, float deltaTime) {
+    player->hitbox.x = player->position.x;
+    player->hitbox.y = player->position.y;
+    player->hitbox.width = PLAYER_WIDTH;
+    player->hitbox.height = player->height;
     player->position.x += player->speed * deltaTime;
 
     if (IsKeyDown(KEY_A)) { // Esquerda

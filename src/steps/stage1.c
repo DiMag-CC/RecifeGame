@@ -50,7 +50,9 @@ void updateStage1(Stage1 *stage, float deltaTime) {
        stage->obstacleQueue.front->obstacle.position.x < -50) {
     dequeueObstacle(&stage->obstacleQueue);
     }
-    
+
+    CheckCollisionRecs();
+
 }
 
 void drawStage1(Stage1 *stage) {
