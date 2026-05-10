@@ -36,17 +36,21 @@ void updateStage1(Stage1 *stage, float deltaTime) {
         stage->obstacleSpawnTimer = 0.0f;
     }
 
-
     if (stage->roadPosition >= GetScreenWidth()) {
         stage->roadPosition = 0.0f;
     }
-
 
     while (current != NULL) {
         current->obstacle.position.x -= 300 * deltaTime;
 
         current = current->next;
     }
+
+    while (!isObstacleQueueEmpty(&stage->obstacleQueue) &&
+       stage->obstacleQueue.front->obstacle.position.x < -50) {
+    dequeueObstacle(&stage->obstacleQueue);
+    }
+    
 }
 
 void drawStage1(Stage1 *stage) {
