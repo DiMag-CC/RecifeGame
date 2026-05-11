@@ -5,7 +5,7 @@
 
 typedef enum {
     MENU_MAIN = 0,
-    MENU_CREDIST = 1
+    MENU_CREDITS = 1
 } MenuScreen;
 
 typedef struct Menu {
