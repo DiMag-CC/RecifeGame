@@ -21,6 +21,8 @@ typedef struct player {
     int height;
     int lives;
     bool grounded;
+    int hasUmbrella;
+    float umbrellaTimer;
 } Player;
 
 Player createPlayer(Vector2 initialPosition, float initialSpeed, int initialLives);
