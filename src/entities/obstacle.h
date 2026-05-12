@@ -6,6 +6,24 @@
 #include "shark.h"
 #include "pigeon.h"
 
+typedef struct {
+    Vector2 position;
+    Rectangle hitbox;
+} Pothole;
+
+typedef struct {
+    Vector2 position;
+    Rectangle hitbox;
+    float fallSpeed;
+    int onGround;
+} PigeonPoop;
+
+typedef struct {
+    Vector2 position;
+    Rectangle hitbox;
+    float speed;
+} Bus;
+
 typedef enum {
     OBSTACLE_CRAB = 0,         
     OBSTACLE_POTHOLE = 1,       
