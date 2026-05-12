@@ -12,6 +12,7 @@ typedef struct Stage1 {
     float roadPosition;  
     ObstacleQueue obstacleQueue;
     float obstacleSpawnTimer;
+    float distanceTraveled;
 } Stage1;
 
 void initStage1(Stage1* stage);  
