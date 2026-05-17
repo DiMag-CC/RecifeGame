@@ -9,33 +9,30 @@ Menu createMenu() {
 }
 
 void updateMenu(Menu *menu) {
-    if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
-        menu->selectedOption--;
+    if (menu->screen == MENU_MAIN) {
+        if (IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_W)) {
+            menu->selectedOption--;
+        }
+
+        if (menu->selectedOption < 0) menu->selectedOption = 2;
+
+        if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
+            menu->selectedOption++;
+        }
+
+        if (menu->selectedOption > 2) menu->selectedOption = 0;
+
+        if (IsKeyPressed(KEY_ENTER)) {
+            if (menu->selectedOption == 1) {
+                menu->screen = MENU_CREDITS;
+            }
+        }
     }
-
-    if (menu->selectedOption < 0) menu->selectedOption = 2;
-
-    if (IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_S)) {
-        menu->selectedOption++;
-    }
-
-    if (menu->screen == MENU_CREDITS) {
-        if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A)) {
+    else if (menu->screen == MENU_CREDITS) {
+        if (IsKeyPressed(KEY_LEFT) || IsKeyPressed(KEY_A) || IsKeyPressed(KEY_ESCAPE) || IsKeyPressed(KEY_ENTER)) {
             menu->screen = MENU_MAIN;
+            menu->selectedOption = 1; // Cursor retorna posicionado na opção "Creditos"
         }
-    }
-
-    if (menu->selectedOption > 2) menu->selectedOption = 0;
-
-    if (IsKeyPressed(KEY_ENTER)) {
-        if (menu->selectedOption == 1) {
-            menu->screen = MENU_CREDITS;
-        }
-    }
-
-    if (IsKeyPressed(KEY_ESCAPE) && menu->screen == MENU_CREDITS) {
-        menu->screen = MENU_MAIN;
-        menu->selectedOption = 0;
     }
 }
 

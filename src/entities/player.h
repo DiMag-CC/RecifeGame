@@ -23,6 +23,8 @@ typedef struct player {
     bool grounded;
     int hasUmbrella;
     float umbrellaTimer;
+    bool isClimbing;
+    bool movementControlledExternally;
 } Player;
 
 Player createPlayer(Vector2 initialPosition, float initialSpeed, int initialLives);

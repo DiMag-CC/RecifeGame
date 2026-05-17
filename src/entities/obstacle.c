@@ -43,14 +43,14 @@ void updateObstacle(Obstacle* obstacle, Vector2 playerPosition, float deltaTime)
             updateShark(&obstacle->data.shark, playerPosition, deltaTime);
             break;
         case OBSTACLE_BUS:
-            obstacle.data.bus.position = position;
-            obstacle.data.bus.hitbox = (Rectangle){
-                position.x, 
-                position.y, 
+            obstacle->data.bus.position = obstacle->position;
+            obstacle->data.bus.hitbox = (Rectangle){
+                obstacle->position.x, 
+                obstacle->position.y, 
                 150,
                 80
             };
-            obstacle.data.bus.speed = 350.0f;
+            obstacle->data.bus.speed = 350.0f;
             break;
         case OBSTACLE_PIGEON: {
             Pigeon *pigeon = &obstacle->data.pigeon;
@@ -82,10 +82,6 @@ void drawObstacle(Obstacle obstacle, Texture2D crabTexture, Texture2D sharkTextu
         }
         case OBSTACLE_PIGEON:
             drawPigeon(obstacle.data.pigeon);
-            break;
-        
-        case OBSTACLE_SHARK:
-            drawShark(obstacle.data.shark, sharkTexture);
             break;
         default:
             break;
